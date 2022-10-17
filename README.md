@@ -1,7 +1,6 @@
 # Crypto Exchanges Platform
 
-Intermediary platform of cryptocurrency exchanges
-
+Cryptocurrency Exchanges API Services
 
 
 

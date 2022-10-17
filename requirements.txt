@@ -6,3 +6,4 @@ django-import-export
 djangorestframework-simplejwt
 gunicorn
 Pillow
+pybit
