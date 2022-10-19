@@ -14,7 +14,8 @@ from pybit import inverse_perpetual
 
 
 
-
+API_KEY = '9oWXNBo4Nl2fp8MqG8'
+API_SECRET = 'F0L9IbuZTycnP5sy5Nk5ZubUCH9q3urFPrp6'
 
 
 #------------------------------------------------------ Test -------------------
@@ -24,8 +25,8 @@ class Test(APIView):
     def get(self, request, format=None):
 
         # Create an HTTP session and connect via WebSocket for Inverse on mainnet:
-        session = inverse_perpetual.HTTP(endpoint='https://api.bybit.com', api_key='...', api_secret='...')
-        ws = inverse_perpetual.WebSocket(test=False, api_key="...", api_secret="..." )
+        session = inverse_perpetual.HTTP(endpoint='https://api.bybit.com', api_key=API_KEY, api_secret=API_SECRET)
+        ws = inverse_perpetual.WebSocket(test=False, api_key=API_KEY, api_secret=API_SECRET )
 
 
         # Get orderbook.
@@ -58,6 +59,7 @@ class Test(APIView):
             pass  # To avoid CPU utilisation, use time.sleep(1)
 
 
+        # https://pypi.org/project/pybit/#installation
 
         return Response(status=status.HTTP_200_OK)
 
