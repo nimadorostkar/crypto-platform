@@ -14,8 +14,10 @@ from pybit import inverse_perpetual
 
 
 
+
 API_KEY = '9oWXNBo4Nl2fp8MqG8'
 API_SECRET = 'F0L9IbuZTycnP5sy5Nk5ZubUCH9q3urFPrp6'
+
 
 
 #------------------------------------------------------ Test -------------------
@@ -57,7 +59,6 @@ class Test(APIView):
         while True:
             # Run your main trading strategy here
             pass  # To avoid CPU utilisation, use time.sleep(1)
-
 
         # https://pypi.org/project/pybit/#installation
 
