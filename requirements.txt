@@ -4,6 +4,7 @@ django-filter
 django-cors-headers
 django-import-export
 djangorestframework-simplejwt
+dj-rest-auth
 gunicorn
 Pillow
 pybit
