@@ -1,5 +1,12 @@
 from django.contrib import admin
-from .models import Exchange
+from .models import Exchange, SourceExchange
+
+
+#-------------------------------------------------------------------------------
+class SourceExchangeAdmin(admin.ModelAdmin):
+    list_display = ('logo_img', 'name', 'smart_trade', 'dca_bot', 'grid_bot', 'options_bot')
+admin.site.register(SourceExchange, SourceExchangeAdmin)
+
 
 
 #-------------------------------------------------------------------------------

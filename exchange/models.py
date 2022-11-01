@@ -1,5 +1,6 @@
 from django.db import models
 from authentication.models import User
+from django.utils.html import format_html
 
 
 
@@ -17,6 +18,9 @@ class SourceExchange(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    def logo_img(self):
+        return format_html("<img style='width:30px;border-radius:50%;' src='{}'>".format(self.logo.url))
 
 
 
