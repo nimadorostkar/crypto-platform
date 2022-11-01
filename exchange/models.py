@@ -2,9 +2,28 @@ from django.db import models
 from authentication.models import User
 
 
+
+#-------------------------------------------------------------------------------
+class SourceExchange(models.Model):
+    CHOICES=(('yes','yes'),('no','no'),('soon','soon'))
+    name=models.CharField(unique=True, max_length=256)
+    order_types=models.CharField(max_length=256)
+    smart_trade=models.CharField(max_length=5,choices=CHOICES,default='soon')
+    dca_bot=models.CharField(max_length=5,choices=CHOICES,default='soon')
+    grid_bot=models.CharField(max_length=5,choices=CHOICES,default='soon')
+    options_bot=models.CharField(max_length=5,choices=CHOICES,default='soon')
+    logo=models.ImageField(upload_to='exchange/logo', default='exchange/logo/default.png')
+    cover=models.ImageField(upload_to='exchange/cover', default='exchange/cover/default.png')
+
+    def __str__(self):
+        return str(self.name)
+
+
+
+
 #-------------------------------------------------------------------------------
 class Exchange(models.Model):
-    #exchange =
+    exchange =  models.ForeignKey(SourceExchange, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
     api_key = models.CharField(max_length=256, null=True, blank=True)
