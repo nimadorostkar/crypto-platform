@@ -4,6 +4,7 @@ from authentication.models import User
 
 #-------------------------------------------------------------------------------
 class Exchange(models.Model):
+    #exchange =
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
     api_key = models.CharField(max_length=256, null=True, blank=True)

@@ -20,7 +20,7 @@ class UserExchanges(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        exchange = Exchange.objects.filter(user=request.user)
+        exchange = models.Exchange.objects.filter(user=request.user)
         serializer = ExchangeSerializer(exchange, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
