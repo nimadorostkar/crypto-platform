@@ -1,6 +1,6 @@
-from .models import Exchange
+from .models import Exchange, SourceExchange
 from . import models
-from .serializers import ExchangeSerializer
+from .serializers import ExchangeSerializer, SourceExchangeSerializer
 from rest_framework.generics import GenericAPIView
 from rest_framework.decorators import api_view, permission_classes
 from django_filters.rest_framework import DjangoFilterBackend
@@ -12,6 +12,18 @@ from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from pybit import inverse_perpetual
 
+
+
+
+
+#------------------------------------------------- SourceExchanges -------------
+class SourceExchanges(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, *args, **kwargs):
+        exchange = models.SourceExchange.objects.all()
+        serializer = SourceExchangeSerializer(exchange, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 

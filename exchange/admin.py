@@ -1,5 +1,12 @@
 from django.contrib import admin
-from .models import Exchange, SourceExchange
+from .models import Exchange, SourceExchange, TradeType
+
+
+
+#-------------------------------------------------------------------------------
+class TradeTypeAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+admin.site.register(TradeType, TradeTypeAdmin)
 
 
 #-------------------------------------------------------------------------------
@@ -11,8 +18,8 @@ admin.site.register(SourceExchange, SourceExchangeAdmin)
 
 #-------------------------------------------------------------------------------
 class ExchangeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'user', 'status', 'created_at')
-    list_filter = ('status', 'created_at', 'user')
+    list_display = ('name', 'user', 'exchange' , 'status', 'created_at')
+    list_filter = ('status', 'created_at', 'exchange', 'user')
     search_fields = ['name', 'user__username']
     raw_id_fields = ('user'),
 admin.site.register(Exchange, ExchangeAdmin)

@@ -12,4 +12,4 @@ class User(AbstractUser):
         return str(self.username)
 
     def img(self):
-        return format_html("<img width=30 src='{}'>".format(self.photo.url))
+        return format_html("<img style='width:30px;border-radius:50%;' src='{}'>".format(self.photo.url))

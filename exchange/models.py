@@ -3,12 +3,19 @@ from authentication.models import User
 from django.utils.html import format_html
 
 
+#-------------------------------------------------------------------------------
+class TradeType(models.Model):
+    name=models.CharField(unique=True, max_length=256)
+
+    def __str__(self):
+        return str(self.name)
+
 
 #-------------------------------------------------------------------------------
 class SourceExchange(models.Model):
     CHOICES=(('yes','yes'),('no','no'),('soon','soon'))
     name=models.CharField(unique=True, max_length=256)
-    order_types=models.CharField(max_length=256)
+    order_types= models.ManyToManyField(TradeType, blank=True)
     smart_trade=models.CharField(max_length=5,choices=CHOICES,default='soon')
     dca_bot=models.CharField(max_length=5,choices=CHOICES,default='soon')
     grid_bot=models.CharField(max_length=5,choices=CHOICES,default='soon')

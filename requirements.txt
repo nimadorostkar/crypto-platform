@@ -8,3 +8,5 @@ dj-rest-auth
 gunicorn
 Pillow
 pybit
+channels
+channels-redis

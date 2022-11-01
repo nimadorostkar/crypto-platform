@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'authentication',
     'landing',
     'exchange',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
+ASGI_APPLICATION = 'core.asgi.application'
 
 
 # Database
