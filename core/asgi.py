@@ -14,6 +14,6 @@ application = ProtocolTypeRouter({
 
    "http": get_asgi_application(),
    "websocket": URLRouter([
-        path('exchangetest', ExchangeConsumer.as_asgi())
+        path('exchange_test', ExchangeConsumer.as_asgi())
      ])
 })
