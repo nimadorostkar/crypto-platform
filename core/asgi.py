@@ -9,8 +9,9 @@ os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 
 
-application = ProtocolTypeRouter(
-{
+
+application = ProtocolTypeRouter({
+
    "http": get_asgi_application(),
    "websocket": URLRouter([
         path('exchangetest', ExchangeConsumer.as_asgi())

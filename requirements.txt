@@ -9,4 +9,4 @@ gunicorn
 Pillow
 pybit
 channels
-channels-redis
+daphne

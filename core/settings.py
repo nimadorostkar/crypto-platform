@@ -34,6 +34,8 @@ AUTH_USER_MODEL = 'authentication.User'
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'daphne',       #https://channels.readthedocs.io/en/stable/installation.html
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,7 +50,6 @@ INSTALLED_APPS = [
     'authentication',
     'landing',
     'exchange',
-    'channels',
 ]
 
 MIDDLEWARE = [
@@ -89,7 +90,7 @@ ASGI_APPLICATION = 'core.asgi.application'
 
 
 
-
+'''
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -98,7 +99,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
-
+'''
 
 
 
