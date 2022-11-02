@@ -1,0 +1,124 @@
+2022-11-02 14:21:50,052 INFO WebSocket Inverse Perp (Auth) attempting connection...
+2022-11-02 14:21:50,052 DEBUG WebSocket Inverse Perp (Auth) closed.
+2022-11-02 14:21:50,053 DEBUG WebSocket Inverse Perp (Auth) opened.
+2022-11-02 14:21:51,056 INFO WebSocket Inverse Perp (Auth) connected
+2022-11-02 14:21:51,139 ERROR Internal Server Error: /api/exchange_data/1
+Traceback (most recent call last):
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/asgiref/sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/asgiref/sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "/usr/local/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/asyncio/tasks.py", line 442, in wait_for
+    return await fut
+  File "/usr/local/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/asgiref/sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/nima/github/crypto-platform/exchange/views.py", line 92, in get
+    ws_inverse = inverse_perpetual.WebSocket(
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/pybit/inverse_perpetual.py", line 709, in __init__
+    self._connect(WSS)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/pybit/_websocket_stream.py", line 167, in _connect
+    self._auth()
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/pybit/_websocket_stream.py", line 189, in _auth
+    self.ws.send(
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/websocket/_app.py", line 233, in send
+    if not self.sock or self.sock.send(data, opcode) == 0:
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/websocket/_core.py", line 280, in send
+    return self.send_frame(frame)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/websocket/_core.py", line 308, in send_frame
+    l = self._send(data)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/websocket/_core.py", line 522, in _send
+    return send(self.sock, data)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/websocket/_socket.py", line 143, in send
+    raise WebSocketConnectionClosedException("socket is already closed.")
+websocket._exceptions.WebSocketConnectionClosedException: socket is already closed.
+2022-11-02 14:21:51,143 DEBUG HTTP 500 response started for ['127.0.0.1', 51463]
+2022-11-02 14:21:51,143 DEBUG HTTP response chunk for ['127.0.0.1', 51463]
+2022-11-02 14:21:51,143 DEBUG HTTP response chunk for ['127.0.0.1', 51463]
+2022-11-02 14:21:51,144 DEBUG HTTP close for ['127.0.0.1', 51463]
+2022-11-02 14:21:51,144 DEBUG HTTP response complete for ['127.0.0.1', 51463]
+2022-11-02 14:21:51,144 ERROR [35;1mHTTP GET /api/exchange_data/1 500 [1.12, 127.0.0.1:51463][0m
+2022-11-02 14:22:00,337 INFO /Users/nima/github/crypto-platform/exchange/views.py changed, reloading.
+2022-11-02 14:22:32,084 INFO WebSocket Inverse Perp (Auth) attempting connection...
+2022-11-02 14:22:32,084 DEBUG WebSocket Inverse Perp (Auth) closed.
+2022-11-02 14:22:32,084 DEBUG WebSocket Inverse Perp (Auth) opened.
+2022-11-02 14:22:33,090 INFO WebSocket Inverse Perp (Auth) connected
+2022-11-02 14:22:33,092 INFO WebSocket Spot attempting connection...
+2022-11-02 14:22:33,092 DEBUG WebSocket Spot closed.
+2022-11-02 14:22:33,092 DEBUG WebSocket Spot opened.
+2022-11-02 14:22:34,096 INFO WebSocket Spot connected
+2022-11-02 14:22:34,163 ERROR Internal Server Error: /api/exchange_data/1
+Traceback (most recent call last):
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/asgiref/sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/asgiref/sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "/usr/local/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/asyncio/tasks.py", line 442, in wait_for
+    return await fut
+  File "/usr/local/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Versions/3.9/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/asgiref/sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/django/views/generic/base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/nima/github/crypto-platform/exchange/views.py", line 124, in get
+    ws_spot.depth_v2_stream(handle_orderbook, "BTCUSDT")
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/pybit/spot.py", line 745, in depth_v2_stream
+    self._ws_public_v2_subscribe(topic, callback)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/pybit/spot.py", line 617, in _ws_public_v2_subscribe
+    self.ws_public_v2.subscribe(topic, callback)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/pybit/_websocket_stream.py", line 563, in subscribe
+    self.ws.send(json.dumps(topic))
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/websocket/_app.py", line 233, in send
+    if not self.sock or self.sock.send(data, opcode) == 0:
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/websocket/_core.py", line 280, in send
+    return self.send_frame(frame)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/websocket/_core.py", line 308, in send_frame
+    l = self._send(data)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/websocket/_core.py", line 522, in _send
+    return send(self.sock, data)
+  File "/Users/nima/github/crypto-platform/env/lib/python3.9/site-packages/websocket/_socket.py", line 143, in send
+    raise WebSocketConnectionClosedException("socket is already closed.")
+websocket._exceptions.WebSocketConnectionClosedException: socket is already closed.
+2022-11-02 14:22:34,168 DEBUG HTTP 500 response started for ['127.0.0.1', 51478]
+2022-11-02 14:22:34,168 DEBUG HTTP response chunk for ['127.0.0.1', 51478]
+2022-11-02 14:22:34,168 DEBUG HTTP response chunk for ['127.0.0.1', 51478]
+2022-11-02 14:22:34,169 DEBUG HTTP close for ['127.0.0.1', 51478]
+2022-11-02 14:22:34,169 DEBUG HTTP response complete for ['127.0.0.1', 51478]
+2022-11-02 14:22:34,169 ERROR [35;1mHTTP GET /api/exchange_data/1 500 [2.10, 127.0.0.1:51478][0m
+2022-11-02 14:22:34,266 WARNING websocket connected
+2022-11-02 14:22:34,586 DEBUG Authorization for Inverse Perp (Auth) failed. Please check your API keys and restart.
+2022-11-02 14:22:34,711 DEBUG Subscription to ['orderBookL2_25.BTCUSD'] successful.
+2022-11-02 14:22:34,954 ERROR Couldn't subscribe to topic.Error: error:topic:position needs auth first.
+2022-11-02 14:22:36,241 WARNING websocket connected
