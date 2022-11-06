@@ -10,3 +10,4 @@ Pillow
 pybit
 channels
 daphne
+ccxt
