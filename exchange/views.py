@@ -88,21 +88,28 @@ class ExchangeData(APIView):
         #my_position = session.my_position()
         #api_key_info = session.api_key_info()
 
-        bybit = ccxt.bybit({ "apiKey":api_key, "secret":api_secret })
-
-        order = bybit.futuresPrivatePostOrderCreate({
-            'symbol':"BTCUSD",
-            'side' : side,
-            'order_type' : 'Limit',
-            'qty' : 2,
-            'time_in_force': "GoodTillCancel",
-            'price' : price
-        })
-
-        return Response(bybit, status=status.HTTP_200_OK)
+        return Response(orderbook, status=status.HTTP_200_OK)
 
 
 
+
+
+
+
+
+
+
+#---------------------------------------------------- ExchangeData -------------
+class OrderBook(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        exchange = models.Exchange.objects.get(id=self.kwargs["id"])
+        api_key=exchange.api_key
+        api_secret=exchange.api_secret
+        session = inverse_perpetual.HTTP(endpoint='https://api.bybit.com', api_key=api_key, api_secret=api_secret)
+        orderbook = session.orderbook(symbol='BTCUSD')
+        return Response(orderbook, status=status.HTTP_200_OK)
 
 
 
