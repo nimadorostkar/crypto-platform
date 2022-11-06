@@ -99,7 +99,7 @@ class ExchangeData(APIView):
 
 
 
-#---------------------------------------------------- ExchangeData -------------
+#---------------------------------------------------- OrderBook -------------
 class OrderBook(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -113,6 +113,88 @@ class OrderBook(APIView):
 
 
 
+#---------------------------------------------------- InfoSymbol -------------
+class InfoSymbol(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        exchange = models.Exchange.objects.get(id=self.kwargs["id"])
+        api_key=exchange.api_key
+        api_secret=exchange.api_secret
+        session = inverse_perpetual.HTTP(endpoint='https://api.bybit.com', api_key=api_key, api_secret=api_secret)
+        info_symbol = session.latest_information_for_symbol(symbol='BTCUSD')
+        return Response(info_symbol, status=status.HTTP_200_OK)
+
+
+#---------------------------------------------------- QuerySymbol -------------
+class QuerySymbol(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        exchange = models.Exchange.objects.get(id=self.kwargs["id"])
+        api_key=exchange.api_key
+        api_secret=exchange.api_secret
+        session = inverse_perpetual.HTTP(endpoint='https://api.bybit.com', api_key=api_key, api_secret=api_secret)
+        query_symbol = session.query_symbol()
+        return Response(query_symbol, status=status.HTTP_200_OK)
+
+
+#---------------------------------------------------- WalletBalance -------------
+class WalletBalance(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        exchange = models.Exchange.objects.get(id=self.kwargs["id"])
+        api_key=exchange.api_key
+        api_secret=exchange.api_secret
+        session = inverse_perpetual.HTTP(endpoint='https://api.bybit.com', api_key=api_key, api_secret=api_secret)
+        wallet_balance = session.get_wallet_balance(coin="BTC")
+        return Response(wallet_balance, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------- ActiveOrder -------------
+class ActiveOrder(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        exchange = models.Exchange.objects.get(id=self.kwargs["id"])
+        api_key=exchange.api_key
+        api_secret=exchange.api_secret
+        session = inverse_perpetual.HTTP(endpoint='https://api.bybit.com', api_key=api_key, api_secret=api_secret)
+        active_order = session.get_active_order(symbol='BTCUSD')
+        return Response(active_order, status=status.HTTP_200_OK)
+
+
+
+#---------------------------------------------------- MyPosition -------------
+class MyPosition(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        exchange = models.Exchange.objects.get(id=self.kwargs["id"])
+        api_key=exchange.api_key
+        api_secret=exchange.api_secret
+        session = inverse_perpetual.HTTP(endpoint='https://api.bybit.com', api_key=api_key, api_secret=api_secret)
+        my_position = session.my_position()
+        return Response(my_position, status=status.HTTP_200_OK)
+
+
+
+
+
+
+#---------------------------------------------------- ApiKeyInfo -------------
+class ApiKeyInfo(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        exchange = models.Exchange.objects.get(id=self.kwargs["id"])
+        api_key=exchange.api_key
+        api_secret=exchange.api_secret
+        session = inverse_perpetual.HTTP(endpoint='https://api.bybit.com', api_key=api_key, api_secret=api_secret)
+        api_key_info = session.api_key_info()
+        return Response(my_position, status=status.HTTP_200_OK)
 
 
 
