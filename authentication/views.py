@@ -18,7 +18,7 @@ from django.core.exceptions import ValidationError
 from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 from django.conf import settings
 from datetime import datetime, timedelta
-
+from . import helper
 
 
 
@@ -33,7 +33,7 @@ class Login(APIView):
         else:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE, data=serializer.errors)
         try:
-            user = authenticate(request, username=data['username'], password=data['password'])
+            user = authenticate(request, email=data['email'], password=data['password'])
             login(request, user)
             token = RefreshToken.for_user(user)
             token_response = { "refresh": str(token), "access": str(token.access_token) }
@@ -114,7 +114,7 @@ class Activation(APIView):
 
     def get(self, request, *args, **kwargs):
         code = helper.random_code()
-        profile = models.User.objects.get(id=self.request.user.id)
+        profile = User.objects.get(id=self.request.user.id)
         profile.otp = code
         profile.save()
         if helper.send_code(profile, code):
