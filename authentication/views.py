@@ -1,6 +1,6 @@
 from .models import User
 #from django.http import JsonResponse
-from .serializers import LoginSerializer, RegisterSerializer, UserSerializer
+from .serializers import LoginSerializer, RegisterSerializer, UserSerializer, ConfirmationSerializer
 from rest_framework.generics import GenericAPIView
 from rest_framework.decorators import api_view, permission_classes
 from django_filters.rest_framework import DjangoFilterBackend
@@ -73,7 +73,7 @@ class Register(APIView):
             data = serializer.validated_data
         else:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE, data = serializer.errors)
-        user = User.objects.create_user(username=data['username'], email=data['email'], password=data['password'])
+        user = User.objects.create_user(email=data['email'], password=data['password'])
         login(request, user)
         token = RefreshToken.for_user(user)
         token_response = { "refresh": str(token), "access": str(token.access_token) }
@@ -128,17 +128,23 @@ class Activation(APIView):
 
 #---------------------------------------------------- Confirmation -------------
 class Confirmation(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
-    def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
+    def post(self, request, *args, **kwargs):
+        serializer = ConfirmationSerializer(data=request.data)
         if serializer.is_valid():
             data = serializer.validated_data
         else:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE, data = serializer.errors)
-        user = User.objects.create_user(username=data['username'], email=data['email'], password=data['password'])
-        login(request, user)
-        token = RefreshToken.for_user(user)
-        token_response = { "refresh": str(token), "access": str(token.access_token) }
-        response = { 'token':token_response , 'user':UserSerializer(user).data }
-        return Response(response, status=status.HTTP_200_OK)
+
+        profile = User.objects.get(id=self.request.user.id)
+        if data['code'] == str(profile.otp):
+            profile.confirmed = True
+            profile.save()
+
+            token = RefreshToken.for_user(profile)
+            token_response = { "refresh": str(token), "access": str(token.access_token) }
+            response = { 'token':token_response , 'user':UserSerializer(profile).data }
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            return Response("User not verified", status=status.HTTP_406_NOT_ACCEPTABLE)
