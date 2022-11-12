@@ -113,9 +113,15 @@ class Activation(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        profile = User.objects.get(id=request.user.id)
-        serializer = UserSerializer(profile)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        code = helper.random_code()
+        profile = models.User.objects.get(id=self.request.user.id)
+        profile.otp = code
+        profile.save()
+        if helper.send_code(profile, code):
+            return Response("Activation code send to {}".format(profile.email) , status=status.HTTP_200_OK)
+        else:
+            return Response("Error sending email - Please try again!" , status=status.HTTP_400_BAD_REQUEST)
+
 
 
 
