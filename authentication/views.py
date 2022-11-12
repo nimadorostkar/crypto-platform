@@ -103,3 +103,36 @@ class Profile(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+
+
+
+
+#------------------------------------------------------ Activation -------------
+class Activation(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        profile = User.objects.get(id=request.user.id)
+        serializer = UserSerializer(profile)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+
+#---------------------------------------------------- Confirmation -------------
+class Confirmation(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            data = serializer.validated_data
+        else:
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE, data = serializer.errors)
+        user = User.objects.create_user(username=data['username'], email=data['email'], password=data['password'])
+        login(request, user)
+        token = RefreshToken.for_user(user)
+        token_response = { "refresh": str(token), "access": str(token.access_token) }
+        response = { 'token':token_response , 'user':UserSerializer(user).data }
+        return Response(response, status=status.HTTP_200_OK)
