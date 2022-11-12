@@ -60,11 +60,20 @@ class Register(APIView):
             data = serializer.validated_data
         else:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE, data = serializer.errors)
-        user = User.objects.create_user(email=data['email'], password=data['password'])
-        login(request, user)
-        token = RefreshToken.for_user(user)
-        token_response = { "refresh": str(token), "access": str(token.access_token) }
-        response = { 'token':token_response , 'user':UserSerializer(user).data }
+        code = helper.random_code()
+        profile = User.objects.create_user(email=data['email'], password=data['password'])
+
+        profile.otp = code
+        profile.save()
+        if helper.send_code(profile, code):
+            activation_send = True
+        else:
+            activation_send = False
+
+        login(request, profile)
+        token = RefreshToken.for_user(profile)
+        token_response = { "refresh": str(token), "access": str(token.access_token), 'activation_send':activation_send }
+        response = { 'token':token_response , 'user':UserSerializer(profile).data }
         return Response(response, status=status.HTTP_200_OK)
 
 #--------------------------------------------------------- Profile -------------
